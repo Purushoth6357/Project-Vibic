@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered music genre classification. Upload any song and our CNN model will identify its genre instantly.">
+    <title>Music Genre Classifier — AI-Powered Genre Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header" id="appHeader">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="2.5"/>
+                        <circle cx="20" cy="20" r="8" stroke="url(#logoGrad)" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="3" fill="url(#logoGrad)"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#a855f7"/>
+                                <stop offset="100%" stop-color="#06b6d4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Genre Classifier</h1>
+                    <p class="subtitle">AI-Powered Music Analysis</p>
+                </div>
+            </div>
+            <div class="header-status" id="headerStatus">
+                <span class="status-dot"></span>
+                <span>Ready</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">
+                        <svg viewBox="0 0 64 64" fill="none">
+                            <path d="M32 8 L32 44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M20 20 L32 8 L44 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 40 L8 52 A4 4 0 0 0 12 56 L52 56 A4 4 0 0 0 56 52 L56 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h2>Drop your audio file here</h2>
+                    <p>or click to browse</p>
+                    <p class="file-types">WAV · MP3 · FLAC · OGG · M4A</p>
+                    <input type="file" id="fileInput" accept=".wav,.mp3,.flac,.ogg,.m4a" hidden>
+                </div>
+            </section>
+
+            <!-- File Info + Audio Player (hidden initially) -->
+            <section class="file-info-section hidden" id="fileInfoSection">
+                <div class="file-info-card glass-card">
+                    <div class="file-details">
+                        <div class="file-icon">🎵</div>
+                        <div>
+                            <h3 id="fileName">—</h3>
+                            <p id="fileSize">—</p>
+                        </div>
+                        <button class="btn-remove" id="btnRemove" title="Remove file">✕</button>
+                    </div>
+                    <audio id="audioPlayer" controls></audio>
+                </div>
+            </section>
+
+            <!-- Predict Button -->
+            <section class="predict-section hidden" id="predictSection">
+                <button class="btn-predict" id="btnPredict">
+                    <span class="btn-text">Classify Genre</span>
+                    <span class="btn-loader hidden" id="btnLoader">
+                        <span class="spinner"></span>
+                        Analyzing...
+                    </span>
+                </button>
+            </section>
+
+            <!-- Results Section (hidden initially) -->
+            <section class="results-section hidden" id="resultsSection">
+                <div class="result-header glass-card">
+                    <div class="predicted-genre-wrapper">
+                        <span class="result-label">Predicted Genre</span>
+                        <h2 class="predicted-genre" id="predictedGenre">—</h2>
+                    </div>
+                    <div class="confidence-badge" id="confidenceBadge">
+                        <svg class="confidence-ring" viewBox="0 0 80 80">
+                            <circle cx="40" cy="40" r="34" class="ring-bg"/>
+                            <circle cx="40" cy="40" r="34" class="ring-fill" id="confidenceRing"
+                                    stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+                        </svg>
+                        <span class="confidence-value" id="confidenceValue">0%</span>
+                    </div>
+                </div>
+
+                <div class="scores-card glass-card">
+                    <h3>All Genre Scores</h3>
+                    <div class="scores-chart" id="scoresChart">
+                        <!-- Bars injected by JS -->
+                    </div>
+                </div>
+
+                <div class="meta-card glass-card">
+                    <div class="meta-item">
+                        <span class="meta-label">Chunks Analyzed</span>
+                        <span class="meta-value" id="chunksAnalyzed">—</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">File Name</span>
+                        <span class="meta-value" id="resultFileName">—</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>By <s>Purushothaman</s> <S>PremKumar
+            </S> <s>Vishwa</s>
+        </p>
+        </footer>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
